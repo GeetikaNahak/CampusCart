@@ -6,11 +6,11 @@ import { Separator } from "@radix-ui/react-separator";
 
 export default function MobileNav() {
   return (
-    <Sheet>
+    <Sheet >
         <SheetTrigger>
             <Menu className="text-black-500"/>
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="bg-white space-y-3">
             <SheetTitle>
                 <span>Welcome to Campus Cart</span>
             </SheetTitle>
