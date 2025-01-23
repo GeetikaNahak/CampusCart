@@ -1,11 +1,10 @@
 // import React from 'react'
 
-import Header from "@/components/ui/Header";
-import from "../components/ui/Header";
+import Header from "@/components/Header";
 type Props={
   children:React.ReactNode;
 }
-export default function layouts({children}:Props) {
+export default function Layouts({children}:Props) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header/>
