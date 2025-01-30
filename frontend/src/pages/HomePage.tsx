@@ -1,6 +1,6 @@
 // import React from 'react'
 import landingImage from '../assets/landingImage.png'
-// import appDownload from '../assets/hero.jpg'
+import appDownload from '../assets/hero.jpg'
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-12">
