@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login, signup } from "../firebase";
+import { login, signup, signInWithGoogle } from "../firebase";
 
 interface AuthPopupProps {
   isOpen: boolean;
@@ -25,6 +25,16 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onClose }) => {
         await login(email, password);
         alert("Login Successful!");
       }
+      onClose();
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      alert("Google Sign-in Successful!");
       onClose();
     } catch (error: any) {
       setError(error.message);
@@ -75,6 +85,25 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onClose }) => {
             {isSignup ? "Sign Up" : "Login"}
           </button>
         </form>
+
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-gray-300" />
+          <span className="mx-2 text-gray-500">OR</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        {/* Google Sign-in Button */}
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full flex items-center justify-center bg-red-500 text-white p-2 rounded hover:bg-red-600"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png"
+            alt="Google Icon"
+            className="w-5 h-5 mr-2"
+          />
+          Sign in with Google
+        </button>
 
         <p className="mt-4 text-sm text-gray-600 text-center">
           {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
