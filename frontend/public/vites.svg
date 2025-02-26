@@ -1,0 +1,37 @@
+<svg
+  width="48"
+  height="48"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Circular Background -->
+  <circle cx="12" cy="12" r="12" fill="white" stroke="black" strokeWidth="1" />
+
+  <!-- Cart Icon -->
+  <path
+    d="M6 7H18L17 13H8L6 7Z"
+    stroke="black"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    fill="none"
+  />
+  
+  <!-- Wheels -->
+  <circle cx="9" cy="16.5" r="1.5" fill="black" />
+  <circle cx="15" cy="16.5" r="1.5" fill="black" />
+
+  <!-- "C" for Campus -->
+  <text
+    x="12"
+    y="12"
+    fontSize="6"
+    fontWeight="bold"
+    fill="black"
+    textAnchor="middle"
+    dominantBaseline="middle"
+  >
+    C
+  </text>
+</svg>
