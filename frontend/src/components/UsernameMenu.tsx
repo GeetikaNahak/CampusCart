@@ -14,13 +14,16 @@ export default function UsernameMenu() {
   return (
     <div>
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-black-500 gap-2">
+          <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-blue-500 gap-2">
             <CircleUserRound className="text-black-500"/>
               {user?.email}
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className="bg-blue">
             <DropdownMenuItem>
             <Link to="/user-profile" className="font-bold hover:text-blue-500">User Profile</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <p>Logout</p>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
