@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login, signup, signInWithGoogle } from "../firebase";
 
+
 interface AuthPopupProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,7 +13,7 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-
+  
   if (!isOpen) return null;
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -26,6 +27,7 @@ const AuthPopup: React.FC<AuthPopupProps> = ({ isOpen, onClose }) => {
         alert("Login Successful!");
       }
       onClose();
+      
     } catch (error: any) {
       setError(error.message);
     }
