@@ -4,10 +4,10 @@
 import { useEffect, useState } from "react";
 import LoginPopup from "./AuthPopup";
 import { useAuth } from "@/context/AppContext";
-import { signOut } from "firebase/auth";
+import {  signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import UsernameMenu from "./UsernameMenu";
-import { useCreateMyUser } from "@/api/MyUserApi";
+import { useCreateMyUser } from "@/api/MyUserApi"
 
 export default function MainNav() {
   const [isPopupOpen, setPopupOpen] = useState(false);
