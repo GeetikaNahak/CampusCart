@@ -2,8 +2,8 @@ import express, { Request,Response} from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
-import myUserRoutes from  "./routes/myUserRoutes" 
-// mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
+import myUserRoutes from  "./routes/MyUserRoute" 
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
 
 
 const app = express();

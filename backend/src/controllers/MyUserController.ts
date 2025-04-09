@@ -1,21 +1,25 @@
-import {Request,Response} from "express";
+import { Application, Request, Response } from "express";
 import User from "../models/user";
-const createCurrentUser=async(req:Request,res:Response)=>{
+
+const createCurrentUser = async (req: Request, res: Response): Promise<Response<any> | any> => {
     try {
-        const {authId}= req.body;
-        const existingUser=await User.findOne(authId);
+        const { authId } = req.body;
+
+        const existingUser = await User.findOne({ authId });
         if (existingUser) {
-            res.status(200).send();
+            return res.status(200).send();  
         }
-        
-        const newUser=new User(req.body);
+
+        const newUser = new User(req.body);
         await newUser.save();
 
-        res.status(201).json(newUser.toObject());
+        return res.status(201).json(newUser.toObject());
     } catch (error) {
-        res.status(500).json({message: "Error Creating User"});
+        console.error("Error creating user:", error);
+        res.status(500).json({ message: "Error Creating User" });
     }
-}
-export default{
-createCurrentUser
+};
+
+export default {
+    createCurrentUser,
 };
