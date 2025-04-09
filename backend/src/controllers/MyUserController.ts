@@ -20,6 +20,25 @@ const createCurrentUser = async (req: Request, res: Response): Promise<Response<
     }
 };
 
+const updateCurrentUser=async(req:Request,res:Response): Promise<Response<any>|any>=>{
+    try {
+        const {name, email, collegeId, branch}=req.body;
+        // const user=await User.findById(req.authId);
+
+        // if(!user){
+        //     return res.status(404).json({message:"User Not Found"});
+        // }
+        // user.name=name;
+        // user.collegeId=collegeId;
+        // user.branch=branch;
+        // await user.save();
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"Error Updating User"});
+    }
+};
+
 export default {
     createCurrentUser,
+    updateCurrentUser,
 };

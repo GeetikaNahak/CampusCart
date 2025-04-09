@@ -13,6 +13,9 @@ const userSchema=new mongoose.Schema({
     },
     collegeId:{
         type: String,
+    },
+    branch:{
+        type:String,
     }
 });
 
