@@ -2,6 +2,7 @@ import { Application, Request, Response } from "express";
 import User from "../models/user";
 
 const createCurrentUser = async (req: Request, res: Response): Promise<Response<any> | any> => {
+
     try {
         const { authId } = req.body;
 
@@ -23,15 +24,16 @@ const createCurrentUser = async (req: Request, res: Response): Promise<Response<
 const updateCurrentUser=async(req:Request,res:Response): Promise<Response<any>|any>=>{
     try {
         const {name, email, collegeId, branch}=req.body;
-        // const user=await User.findById(req.authId);
+        const user=await User.findOne(req.body);
 
-        // if(!user){
-        //     return res.status(404).json({message:"User Not Found"});
-        // }
-        // user.name=name;
-        // user.collegeId=collegeId;
-        // user.branch=branch;
-        // await user.save();
+        if(!user){
+            return res.status(404).json({message:"User Not Found"});
+        }
+        user.name=name;
+        user.collegeId=collegeId;
+        user.branch=branch;
+        await user.save();
+        res.send(user);
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Error Updating User"});
