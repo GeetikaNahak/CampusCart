@@ -8,8 +8,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/LoadingButton";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -50,6 +53,7 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
               <FormControl>
                 <Input {...field} disabled className="bg-white" />
               </FormControl>
+              <FormMessage/>
             </FormItem>;
           }}
         />
@@ -62,11 +66,11 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input {...field} disabled className="bg-white" />
-              </FormControl>
+              </FormControl><FormMessage/>
             </FormItem>;
           }}
         />
-        <div className="flex flex-col md:flex-row gp-4">
+        <div className="flex flex-col md:flex-row gap-4">
         <FormField
           control={form.control}
           name="collegeId"
@@ -74,8 +78,8 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
             return <FormItem>
               <FormLabel>College ID</FormLabel>
               <FormControl>
-                <Input {...field} disabled className="bg-white" />
-              </FormControl>
+                <Input {...field}  className="bg-white" />
+              </FormControl><FormMessage/>
             </FormItem>;
           }}
         />
@@ -87,12 +91,13 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
             return <FormItem>
               <FormLabel>Branch</FormLabel>
               <FormControl>
-                <Input {...field} disabled className="bg-white" />
-              </FormControl>
+                <Input {...field}  className="bg-white" />
+              </FormControl><FormMessage/>
             </FormItem>;
           }}
         />
         </div>
+        {isLoading?<LoadingButton/>:<Button type="submit" className="bg-black-500">Submit</Button>}
       </form>
     </Form>
   );
