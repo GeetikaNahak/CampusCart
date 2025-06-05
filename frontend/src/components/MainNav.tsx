@@ -8,6 +8,7 @@
 // import UsernameMenu from "./UsernameMenu";
 import { Button } from "./ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
+import UsernameMenu from "./UsernameMenu";
 // import { useCreateMyUser } from "@/api/MyUserApi"
 
 export default function MainNav() {
@@ -19,8 +20,8 @@ export default function MainNav() {
   //     createUser({authId:user?.uid, email:user?.email});
   //   }
   // }, [user])
-  const {loginWithRedirect}=useAuth0();
-
+//   const {loginWithRedirect,isAuthenticated}=useAuth0();
+// isAuthenticated?(<UsernameMenu/>):(</Button>)
   return (
     <Button
       variant="ghost"
