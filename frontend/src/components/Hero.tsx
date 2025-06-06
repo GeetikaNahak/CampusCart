@@ -1,5 +1,5 @@
 // import React from 'react'
-import hero from "../assets/hero.jpg"
+import hero from "../assets/campusHero.jpg"
 export default function Hero() {
   return (
     <div>
