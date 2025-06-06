@@ -14,6 +14,8 @@ export default function UserProfilePage() {
         }
     updateUser;    }
   return (
-    <UserProfileForm onSave={handleSave} isLoading={isLoading}/>
+    <div className="px-4 sm:px-6 md:px-8">
+  <UserProfileForm onSave={handleSave} isLoading={isLoading} />
+</div>
   );
 }
