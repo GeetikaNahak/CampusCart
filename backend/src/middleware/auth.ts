@@ -1,7 +1,7 @@
 import { auth } from "express-oauth2-jwt-bearer";
 
-const jwtCheck = auth({
-  audience: 'campus-cart-app-api',
-  issuerBaseURL: 'https://dev-u4cexii23wkuqb3p.us.auth0.com/',
+export const jwtCheck = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   tokenSigningAlg: 'RS256'
 });
