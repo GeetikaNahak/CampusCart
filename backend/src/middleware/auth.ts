@@ -19,7 +19,7 @@ export const jwtCheck = auth({
   tokenSigningAlg: 'RS256'
 });
 
-export const jwtParse=async(req:Request,res:Response,next:NextFunction)=>{
+export const jwtParse=async(req:Request,res:Response,next:NextFunction):Promise<any>=>{
   const {authorization}=req.headers;
   if(!authorization||!authorization.startsWith("Bearer ")){
     return res.sendStatus(401);
