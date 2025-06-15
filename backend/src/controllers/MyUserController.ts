@@ -24,12 +24,14 @@ const createCurrentUser = async (req: Request, res: Response): Promise<Response<
 const updateCurrentUser=async(req:Request,res:Response): Promise<Response<any>|any>=>{
     try {
         const {name, email, collegeId, branch}=req.body;
-        const user=await User.findOne(req.body);
+        
+        const user=await User.findById(req.userId);
 
         if(!user){
             return res.status(404).json({message:"User Not Found"});
         }
         user.name=name;
+        user.email=email;
         user.collegeId=collegeId;
         user.branch=branch;
         await user.save();

@@ -31,12 +31,11 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
   const form = useForm<UserFromData>({
     resolver: zodResolver(formSchema),
   });
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSave)}
-        className="space-y-4 bg-gray-50 rounded-lg md:p-10"
+        className="space-y-4 bg-gray-100 rounded-lg md:p-10"
       >
         <div>
           <h2 className="text-2xl font-bold">User Profile From </h2>
@@ -48,13 +47,15 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
           control={form.control}
           name="email"
           render={({ field }) => {
-            return <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input {...field} disabled className="bg-white" />
-              </FormControl>
-              <FormMessage/>
-            </FormItem>;
+            return (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input {...field} value={"test@mail.com"} disabled className="bg-white" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
           }}
         />
 
@@ -62,42 +63,62 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
           control={form.control}
           name="name"
           render={({ field }) => {
-            return <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input {...field} disabled className="bg-white" />
-              </FormControl><FormMessage/>
-            </FormItem>;
+            return (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input {...field} disabled className="bg-white" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
           }}
         />
         <div className="flex flex-col md:flex-row gap-4">
-        <FormField
-          control={form.control}
-          name="collegeId"
-          render={({ field }) => {
-            return <FormItem>
-              <FormLabel>College ID</FormLabel>
-              <FormControl>
-                <Input {...field}  className="bg-white" />
-              </FormControl><FormMessage/>
-            </FormItem>;
-          }}
-        />
+          <FormField
+            control={form.control}
+            name="collegeId"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>College ID</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="bg-white" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
 
-        <FormField
-          control={form.control}
-          name="branch"
-          render={({ field }) => {
-            return <FormItem>
-              <FormLabel>Branch</FormLabel>
-              <FormControl>
-                <Input {...field}  className="bg-white" />
-              </FormControl><FormMessage/>
-            </FormItem>;
-          }}
-        />
+          <FormField
+            control={form.control}
+            name="branch"
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Branch</FormLabel>
+                  <FormControl>
+                    <Input {...field} className="bg-white" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
         </div>
-        {isLoading?<LoadingButton/>:<Button type="submit" className="bg-black-500">Submit</Button>}
+        <div className="pt-4">
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-md transition"
+            >
+              Submit
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   );
