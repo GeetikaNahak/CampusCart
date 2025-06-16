@@ -23,7 +23,7 @@ const formSchema = z.object({
 type UserFromData = z.infer<typeof formSchema>;
 
 type Props = {
-  onSave: (UserProfileData: UserFromData) => void;
+  onSave: (UserProfileData: UserFromData) => any;
   isLoading: boolean;
 };
 
@@ -67,7 +67,7 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled className="bg-white" />
+                  <Input {...field}  className="bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

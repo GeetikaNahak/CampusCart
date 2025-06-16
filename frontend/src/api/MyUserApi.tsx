@@ -41,17 +41,19 @@ export const useCreateMyUser=()=>{
 
 type updateMyUserRequest={
     name:string | undefined;
-    email:string | undefined;
+    email?:string ;
     collegeId:string | undefined;
     branch:string ;
 }
 
 export const useUpdateMyUser=()=>{
-    // const {getAccessTokenSilently}=useAuth0;
+    const {getAccessTokenSilently}=useAuth0();
+    const accessToken=getAccessTokenSilently();
     const updateMyUserRequest=async(formData:updateMyUserRequest)=>{
         const response =await fetch(`${API_BASE_URL}/api/my/user`,{
             method:"Put",
             headers:{
+                Authorization: `Bearer ${accessToken}`,
                 "Content-type":"application/json",
             },
             body:JSON.stringify(formData),
