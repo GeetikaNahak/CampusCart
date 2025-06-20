@@ -1,5 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { error } from "console";
 import { useMutation } from "react-query";
+import { toast } from "sonner";
 
 const API_BASE_URL= import.meta.env.VITE_API_BASE_URL;
 type CreateUserRequest={
@@ -26,11 +28,15 @@ export const useCreateMyUser=()=>{
         }
     };
     const {mutateAsync: createUser,isLoading,isError,isSuccess}=useMutation(createMyUserRequest);
+    if(isSuccess){
+        toast.success("Account Created Successfully");
+    }
+    if(isError){
+        toast.success("Error Creating Account");
+    }
     return {
         createUser,
         isLoading,
-        isError,
-        isSuccess,
     };
 };
 
@@ -53,7 +59,7 @@ export const useUpdateMyUser = () => {
     if (!response.ok) {
       throw new Error("Failed to update user");
     }
-
+    
     return response.json();
   };
 
@@ -62,16 +68,21 @@ export const useUpdateMyUser = () => {
     isLoading,
     isSuccess,
     isError,
-    error,
     reset,
   } = useMutation(updateMyUserRequest);
 
+  if(isSuccess){
+    toast.success("User Profile Updated");
+  }
+  if(isError){
+    toast.error("Error Updating User Profile");
+    reset();
+  }
   return {
     updateUser,
     isLoading,
-    isSuccess,
-    isError,
-    error,
+    
+    
     reset,
   };
 };
