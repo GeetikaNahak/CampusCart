@@ -5,7 +5,7 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./AppRoutes.tsx";
 import Auth0ProviderWithNavigate from "./auth/Auth0ProviderWithNavigate.tsx";
-import { AuthProvider } from "./context/AppContext.tsx";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient({
@@ -21,9 +21,7 @@ createRoot(document.getElementById("root")!).render(
     <Router>
       <QueryClientProvider client={queryClient}>
         <Auth0ProviderWithNavigate>
-          <AuthProvider>
             <AppRoutes />
-          </AuthProvider>
         </Auth0ProviderWithNavigate>
       </QueryClientProvider>
     </Router>
