@@ -26,10 +26,8 @@ Campus Cart is a full-stack e-commerce web application revolutionizing the colle
 
 Clone the repos (Frontend & Backend), install dependencies (`npm install`), configure `.env` files with your keys (MongoDB, Auth0, Stripe, Cloudinary), and run `npm start` (or `npm run dev`) for both.
 
----
 
 ## 🤝 Contributing
 
 Contributions are welcome! Fork the repo, create a feature branch, commit your changes, and open a Pull Request.
 
----
