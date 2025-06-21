@@ -1,6 +1,8 @@
-# CampusCart
+# Campus Cart 🛒
 
-CampusCart is a web app for college students to check item availability in campus stores and make purchases easily.
+**Your Campus, Your Canteen, Your Way!**
+
+Campus Cart is a full-stack e-commerce web application revolutionizing the college canteen and on-campus store experience for both students and vendors. Students can browse, order, and track, while vendors manage restaurants and orders efficiently.
 
 ## Features
 
@@ -16,24 +18,18 @@ CampusCart is a web app for college students to check item availability in campu
 - **Database**: MongoDB
 - **Tools**: Firebase, Payment Gateway
 
-## Setup
+## 🔗 Live Demo
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/CampusCart.git
-   cd CampusCart
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set environment variables in `.env`:
-   ```env
-   MONGO_URI=your_mongodb_connection_string
-   ```
-4. Start the app:
-   ```bash
-   npm start
-   ```
-5. Open `http://localhost:3000` in your browser.
+Experience Campus Cart live: [**Visit Campus Cart**](https://campus-cart-frontend-32nq.onrender.com/) 
 
+## 🛠️ Installation (For Developers)
+
+Clone the repos (Frontend & Backend), install dependencies (`npm install`), configure `.env` files with your keys (MongoDB, Auth0, Stripe, Cloudinary), and run `npm start` (or `npm run dev`) for both.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Fork the repo, create a feature branch, commit your changes, and open a Pull Request.
+
+---
