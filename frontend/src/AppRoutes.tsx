@@ -1,6 +1,6 @@
 // import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Layouts from './layouts/Layouts.tsx'
+import Layouts from './layouts/layout.tsx'
 import HomePage from './pages/HomePage.tsx'
 import UserProfilePage from './pages/UserProfilePage.tsx'
 import AuthCallbackPage from './pages/AuthCallbackPage.tsx'
