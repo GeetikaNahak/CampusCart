@@ -90,10 +90,18 @@ const UserProfileForm = ({ onSave, isLoading,currentUser }: Props) => {
             control={form.control}
             name="collegeId"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>College ID</FormLabel>
+              <FormItem className="flex flex-col p-3">
+                <FormLabel>Role</FormLabel>
                 <FormControl>
-                  <Input {...field} className="bg-white" />
+                  <select
+                    {...field}
+                    className="bg-white border border-gray-300 p-1 mt-2 outline-none"
+                  >
+                    <option value="">Select a role</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="vendor">Vendor</option>
+                  </select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
