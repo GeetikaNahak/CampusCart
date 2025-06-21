@@ -24,7 +24,8 @@ export const createCurrentUser = async (req: Request, res: Response): Promise<Re
 export const updateCurrentUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const { email ,name, collegeId, branch } = req.body;
-    const user = await User.findOne({email});
+    
+    const user = await User.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -38,7 +39,7 @@ export const updateCurrentUser = async (req: Request, res: Response):Promise<any
     console.log("Success");
     res.send(user);
   } catch (error) {
-    console.log(error);
+    console.log("error 500",error);
     res.status(500).json({ message: "Error updating user" });
   }
 };
