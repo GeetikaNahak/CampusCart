@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
+import { User } from "@/types";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -25,7 +26,7 @@ const formSchema = z.object({
 type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
-  
+  currentUser:User;
   onSave: (data: UserFormData) => void | Promise<void>;
   isLoading: boolean;
   defaultValues?: Partial<UserFormData>;
@@ -33,23 +34,16 @@ type Props = {
 
 
 
-const UserProfileForm = ({ onSave, isLoading, defaultValues }: Props) => {
+const UserProfileForm = ({ onSave, isLoading,currentUser }: Props) => {
 
   
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: defaultValues?.email ?? "email.mail.com",
-      name: defaultValues?.name ?? "",
-      collegeId: defaultValues?.collegeId ?? "",
-      branch: defaultValues?.branch ?? "",
-    },
+    defaultValues: currentUser,
   });
-  const emailValue = form.watch("email");
-
-  useEffect(() => {
-    console.log("Email changed to:", emailValue);
-  }, [emailValue]);
+  useEffect(()=>{
+    form.reset(currentUser);
+  },[currentUser,form]);
   return (
     <Form {...form}>
       <form
@@ -70,7 +64,7 @@ const UserProfileForm = ({ onSave, isLoading, defaultValues }: Props) => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} className="bg-white" />
+                <Input {...field} disabled className="bg-white" />
               </FormControl>
               <FormMessage />
             </FormItem>
