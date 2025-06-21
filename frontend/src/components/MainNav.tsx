@@ -1,6 +1,6 @@
-import { Button } from "./ui/button";
+import { Button } from "./ui/button.tsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import UsernameMenu from "./UsernameMenu";
+import UsernameMenu from "./UsernameMenu.tsx";
 
 export default function MainNav() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();

@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { CircleUserRound } from "lucide-react";
-import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu.tsx";
 import {
   DropdownMenuContent,
   DropdownMenuItem,

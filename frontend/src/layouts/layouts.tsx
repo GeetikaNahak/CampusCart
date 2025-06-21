@@ -1,8 +1,8 @@
 // import React from 'react'
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import Footer from "@/components/Footer.tsx";
+import Header from "@/components/Header.tsx";
+import Hero from "@/components/Hero.tsx";
 type Props={
   children:React.ReactNode;
   showHero?:boolean;
