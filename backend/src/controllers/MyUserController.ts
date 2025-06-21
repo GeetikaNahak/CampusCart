@@ -1,6 +1,20 @@
 import { Application, Request, Response } from "express";
 import User from "../models/user";
 
+
+export const getCurrentUser=async(req: Request, res: Response): Promise<Response<any> | any>=>{
+  try {
+    const currentUser=await User.findById({_id: req.userId});
+    if(!currentUser){
+      return res.status(404).json({message:"User Not Found"});
+    }
+    res.json(currentUser);
+  } catch (error) {
+      console.log(error);
+        res.status(500).json({ message: "Error Fetching User" });
+    }
+}
+
 export const createCurrentUser = async (req: Request, res: Response): Promise<Response<any> | any> => {
 
     try {
