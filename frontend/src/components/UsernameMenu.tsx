@@ -28,6 +28,14 @@ export default function UsernameMenu() {
               User Profile
             </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem className="hover:bg-blue-100 px-2 py-1 rounded-md cursor-pointer">
+            <Link
+              to="/manage-store"
+              className="text-sm font-medium text-gray-700"
+            >
+              Manage Store
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => logout()}
             className="hover:bg-red-100 px-2 py-1 rounded-md cursor-pointer text-red-600 text-sm font-medium"

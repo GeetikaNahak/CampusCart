@@ -28,10 +28,7 @@ export const validateMyStoreRequest=[
     .notEmpty().withMessage("Description is required")
     .isLength({ min: 10 }).withMessage("Description must be at least 10 characters long"),
 
-  body("imageUrl")
-    .notEmpty().withMessage("Image URL is required")
-    .isURL().withMessage("Image URL must be a valid URL"),
-
+  
   body("cuisines")
     .isArray({ min: 1 }).withMessage("At least one cuisine is required"),
 
