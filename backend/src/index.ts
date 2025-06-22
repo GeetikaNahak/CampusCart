@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import myUserRoute from  "./routes/MyUserRoute" 
+import myStoreRoute from "./routes/MyStoreRoute"
 import { v2 as cloudinary } from 'cloudinary';
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
 
@@ -20,6 +21,7 @@ app.get("/health",async(req:Request,res:Response)=>{
     res.send({message:"Health OK!"});
 })
 app.use("/api/my/user",myUserRoute)
+app.use("/api/my/store",myStoreRoute);
 
 app.listen(8000,()=>{
     console.log("Server running at http://localhost:8000");
