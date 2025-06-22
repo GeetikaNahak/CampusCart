@@ -44,9 +44,7 @@ export const validateMyStoreRequest=[
   body("items.*.price")
     .isFloat({ min: 0 }).withMessage("Each item must have a valid price"),
 
-  body("items.*.available")
-    .isBoolean().withMessage("Each item must have an availability status"),
-
+ 
   body("lastUpdated")
     .notEmpty().withMessage("Last updated date is required")
     .isISO8601().withMessage("Last updated must be a valid date"),

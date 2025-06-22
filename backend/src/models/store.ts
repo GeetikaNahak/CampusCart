@@ -9,7 +9,7 @@ const ItemSchema=new mongoose.Schema({
         type:Number,required:true
     },
     available:{
-        type:Boolean,require:true
+        type:Boolean
     }
 
 })

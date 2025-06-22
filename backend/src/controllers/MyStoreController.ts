@@ -7,6 +7,7 @@ const createMyStore=async (req:Request,res:Response):Promise<any>=>{
     try {
         const existingStore=await Store.findOne({user:req.userId});
         if(existingStore){
+            
             return res.status(409).json({message:"user Exists"});
         }
 
@@ -28,6 +29,23 @@ const createMyStore=async (req:Request,res:Response):Promise<any>=>{
     }
 }
 
+
+const getMyStore=async(req:Request,res:Response):Promise<any>=>{
+    try {
+        const store=await Store.findOne({user:req.userId});
+        if(!store){
+            return res.status(404).json({message:"User Not Found"});
+        }
+        res.json(store);
+  } catch (error) {
+      console.log(error);
+        res.status(500).json({ message: "Error Fetching store" });
+    }
+
+}
+
 export default {
-    createMyStore
+    getMyStore,
+    createMyStore,
+    
 }

@@ -21,7 +21,7 @@ const MenuSection = () => {
       </div>
       <FormField
         control={control}
-        name="menuItems"
+        name="Items"
         render={() => (
           <FormItem className="flex flex-col gap-2">
             {fields.map((_, index) => (

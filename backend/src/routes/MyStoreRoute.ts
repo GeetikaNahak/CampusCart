@@ -13,5 +13,6 @@ const upload=multer({
     }
 })
 // Route : /api/my/store
-router.post("/",upload.single("imageFile"),jwtCheck,jwtParse,validateMyStoreRequest, MyStoreController.createMyStore);
+router.get("/",jwtCheck,jwtParse,MyStoreController.getMyStore);
+router.post("/",upload.single("imageFile"),jwtCheck,jwtParse, MyStoreController.createMyStore);
 export default router;
