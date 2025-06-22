@@ -19,8 +19,9 @@ const createMyStore=async (req:Request,res:Response):Promise<any>=>{
         const store=new Store(req.body);
         store.imageUrl=uploadResponse.url;
         store.user=new mongoose.Types.ObjectId(req.userId);
-
-        res.status(200).send({"message":"Store Created"});
+        store.lastUpdated=new Date();
+        await store.save();
+        res.status(200).send(store);
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Something Weng Wrong"});
