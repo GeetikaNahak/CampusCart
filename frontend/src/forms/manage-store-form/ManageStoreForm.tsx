@@ -59,15 +59,10 @@ const ManageStoreForm = ({store, onSave, isLoading }: Props) => {
 
   useEffect(() => {
     if(!store)return;
-    const itemsFormated=store.items.map((item)=>({
-      ...item,
-      price:parseInt((item.price/100).toFixed(2)),
-    }))
+    
     
     const updatedStore={
       ...store,
-      
-      // items=itemsFormated,
       
     }
     form.reset(updatedStore);
