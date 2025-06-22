@@ -9,6 +9,8 @@ import MenuSection from "./MenuSection";
 import ImageSection from "./ImageSection";
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { Store } from "@/types";
+import { useEffect } from "react";
 
 export const formSchema = z
   .object({
@@ -41,11 +43,12 @@ export const formSchema = z
 type StoreFormData = z.infer<typeof formSchema>;
 
 type Props = {
+  store?:Store;
   onSave: (storeFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const ManageStoreForm = ({ onSave, isLoading }: Props) => {
+const ManageStoreForm = ({store, onSave, isLoading }: Props) => {
   const form = useForm<StoreFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,6 +56,23 @@ const ManageStoreForm = ({ onSave, isLoading }: Props) => {
       items: [{ name: "", price: 0 }],
     },
   });
+
+  useEffect(() => {
+    if(!store)return;
+    const itemsFormated=store.items.map((item)=>({
+      ...item,
+      price:parseInt((item.price/100).toFixed(2)),
+    }))
+    
+    const updatedStore={
+      ...store,
+      
+      // items=itemsFormated,
+      
+    }
+    form.reset(updatedStore);
+  }, [form,store])
+  
 
   const onsubmit = (formDataJson: StoreFormData) => {
     const formData = new FormData();
