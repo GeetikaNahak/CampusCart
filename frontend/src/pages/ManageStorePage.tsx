@@ -1,12 +1,21 @@
-import { useCreateMyStore, useGetMyStore } from "@/api/MyStoreApi"
-import ManageStoreForm from "@/forms/manage-store-form/ManageStoreForm"
+import { useCreateMyStore, useGetMyStore, useUpdateMyStore } from "@/api/MyStoreApi";
+import ManageStoreForm from "@/forms/manage-store-form/ManageStoreForm";
 
 const ManageStorePage = () => {
-    const {createStore,isLoading} = useCreateMyStore();
-    const {store,}=useGetMyStore();
-  return (
-      <ManageStoreForm store={store} onSave={createStore} isLoading={isLoading}/>
-  )
-}
+  const { store, isLoading: isStoreLoading } = useGetMyStore();
+  const { createStore, isLoading: isCreateLoading } = useCreateMyStore();
+  const { updateStore, isLoading: isUpdateLoading } = useUpdateMyStore();
 
-export default ManageStorePage
+  const isEditing = !!store;
+  const isLoading = isStoreLoading || isCreateLoading || isUpdateLoading;
+
+  return (
+    <ManageStoreForm
+      store={store}
+      onSave={isEditing ? updateStore : createStore}
+      isLoading={isLoading}
+    />
+  );
+};
+
+export default ManageStorePage;

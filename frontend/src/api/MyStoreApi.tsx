@@ -65,3 +65,41 @@ export const useGetMyStore = () => {
 
   return { store, isLoading };
 };
+
+export const useUpdateMyStore = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const updateMyStoreRequest = async (storeFormData: FormData): Promise<Store> => {
+    const accessToken = await getAccessTokenSilently();
+    const response = await fetch(`${API_BASE_URL}/api/my/store`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: storeFormData,
+    });
+
+    if (!response.ok) {
+      console.log('fail')
+      throw new Error("Failed to update store");
+    }
+
+    return response.json();
+  };
+
+  const {
+    mutate: updateStore,
+    isLoading,
+    isSuccess,
+    error,
+  } = useMutation(updateMyStoreRequest, {
+    onSuccess: () => {
+      toast.success("Store updated successfully");
+    },
+    onError: () => {
+      toast.error("Unable to update store");
+    },
+  });
+
+  return { updateStore, isLoading, isSuccess, error };
+};
