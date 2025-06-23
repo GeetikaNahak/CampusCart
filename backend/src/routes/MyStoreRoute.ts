@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 import multer from 'multer';
 import MyStoreController from '../controllers/MyStoreController';
 import { jwtCheck, jwtParse } from '../middleware/auth';
-import { validateMyStoreRequest } from '../middleware/validation';
+
 
 const router=Router();
 const storage=multer.memoryStorage();

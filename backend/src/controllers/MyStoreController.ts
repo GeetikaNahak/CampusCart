@@ -58,10 +58,10 @@ const updateMyStore=async(req:Request,res:Response):Promise<any>=>{
         store.description=req.body.description;
         store.cuisines=req.body.cuisines;
         store.items=req.body.items;
-        // if(req.file){
-        //     const imageUrl=await uploadImage(req.file as Express.Multer.File);
-        //     store.imageUrl=imageUrl;
-        // }
+        if(req.file){
+            const imageUrl=await uploadImage(req.file as Express.Multer.File);
+            store.imageUrl=imageUrl;
+        }
         await store.save();
         res.status(200).send(store);
 
