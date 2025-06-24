@@ -4,6 +4,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import myUserRoute from  "./routes/MyUserRoute" 
 import myStoreRoute from "./routes/MyStoreRoute"
+import storeRoute from "./routes/StoreRoute"
 import { v2 as cloudinary } from 'cloudinary';
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
 
@@ -22,7 +23,7 @@ app.get("/health",async(req:Request,res:Response)=>{
 })
 app.use("/api/my/user",myUserRoute)
 app.use("/api/my/store",myStoreRoute);
-
+app.use("/api/store",storeRoute)
 app.listen(8000,()=>{
     console.log("Server running at http://localhost:8000");
 });

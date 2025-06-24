@@ -27,7 +27,17 @@ const searchStore=async (req:Request,res:Response):Promise<any>=>{
         }
         const pageSize=10;
         const skip=(page-1)*pageSize;
-        const stores=await Store.find(query).sort({[sortOption]:1}).skip(skip).limit(pageSize);
+        const stores=await Store.find(query).sort({[sortOption]:1}).skip(skip).limit(pageSize).lean();
+        const total=await Store.countDocuments(query);
+        const response={
+            data:stores,
+            pagination:{
+                total,page,
+                pages:Math.ceil(total/pageSize),
+
+            }
+        }
+        res.json(response);
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Something went wrong searching"});
