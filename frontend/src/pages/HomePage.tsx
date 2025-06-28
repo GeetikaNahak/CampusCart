@@ -1,9 +1,15 @@
 // import React from "react";
-import { Input } from "@/components/ui/input.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import {  useNavigate } from "react-router-dom";
 import landingImage from "../assets/landingImage.png";
+import SearchBar, { SearchFrom } from "@/components/SearchBar";
 
 export default function HomePage() {
+  const navigate=useNavigate();
+  const handleSearchSubmit=(searchFromValues:SearchFrom)=>{
+    navigate({
+      pathname:`/search/${searchFromValues.searchQuery}`,
+    })
+  }
   return (
     <div className="flex flex-col gap-12 ">
       <div className="bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16">
@@ -12,7 +18,7 @@ export default function HomePage() {
         </h1>
         <span className="text-xl">Food is just a click away!!</span>
 
-        {/* Search Bar */}
+        {/* Search Bar
         <div className="flex items-center w-full max-w-md mx-auto border border-gray-300 rounded-tl-lg overflow-hidden">
           <Input
             type="text"
@@ -22,7 +28,9 @@ export default function HomePage() {
           <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
             Search
           </Button>
-        </div>
+        </div> */}
+
+        <SearchBar  placeHolder="Search by Store Name " onSubmit={handleSearchSubmit}/>
       </div>
 
       <div className="grid md:grid-cols-2 gap-5">
