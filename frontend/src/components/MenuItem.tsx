@@ -6,9 +6,9 @@ type Props = {
   addToCart: () => void;
 };
 
-const MenuItem = ({ menuItem }: Props) => {
+const MenuItem = ({ menuItem ,addToCart}: Props) => {
   return (
-    <Card className="cursor-pointer">
+    <Card className="cursor-pointer" onClick={addToCart}>
       <CardHeader>
         <CardTitle>{menuItem.name}</CardTitle>
       </CardHeader>
