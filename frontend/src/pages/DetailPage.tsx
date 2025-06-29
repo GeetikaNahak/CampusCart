@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Item as MenuItemType } from "../types";
 import CheckoutButton from "@/components/CheckoutButton";
+import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
 
 export type CartItem = {
   _id: string;
@@ -50,6 +51,11 @@ const DetailPage = () => {
       return updatedCartItems;
     });
   };
+  const onCheckout=(userFormData:UserFormData)=>{
+    console.log("UserFormData",userFormData);
+  }
+
+
   const removeFromCart = (cartItem: CartItem) => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.filter(
@@ -88,7 +94,7 @@ const DetailPage = () => {
               cartItems={cartItems}
               removeFromCart={removeFromCart}
             />
-            <CardFooter><CheckoutButton/></CardFooter>
+            <CardFooter><CheckoutButton disabled={cartItems.length===0} onCheckout={onCheckout}/></CardFooter>
           </Card>
         </div>
       </div>

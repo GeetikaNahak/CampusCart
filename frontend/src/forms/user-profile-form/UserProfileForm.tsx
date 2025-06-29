@@ -23,18 +23,20 @@ const formSchema = z.object({
   branch: z.string().min(1, "Branch is required"),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   currentUser:User;
   onSave: (data: UserFormData) => void | Promise<void>;
   isLoading: boolean;
   defaultValues?: Partial<UserFormData>;
+  title?:string;
+  buttonText?:string;
 };
 
 
 
-const UserProfileForm = ({ onSave, isLoading,currentUser }: Props) => {
+const UserProfileForm = ({ onSave, isLoading,currentUser,title="User Profile",buttonText="submit" }: Props) => {
 
   
   const form = useForm<UserFormData>({
@@ -51,7 +53,7 @@ const UserProfileForm = ({ onSave, isLoading,currentUser }: Props) => {
         className="space-y-4 bg-gray-100 rounded-lg md:p-10"
       >
         <div>
-          <h2 className="text-2xl font-bold">User Profile Form</h2>
+          <h2 className="text-2xl font-bold">{title}</h2>
           <FormDescription>
             View and update your profile information here.
           </FormDescription>
@@ -131,7 +133,7 @@ const UserProfileForm = ({ onSave, isLoading,currentUser }: Props) => {
               type="submit"
               className="bg-blue-600 hover:bg-blue-950 text-white font-medium px-6 py-2 rounded-md transition"
             >
-              Submit
+              {buttonText}
             </Button>
           )}
         </div>
