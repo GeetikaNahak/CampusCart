@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { Item as MenuItemType } from "../types";
 import CheckoutButton from "@/components/CheckoutButton";
 import { UserFormData } from "@/forms/user-profile-form/UserProfileForm";
+import { useCreateCheckoutSession } from "@/api/OrderApi";
 
 export type CartItem = {
   _id: string;
@@ -20,6 +21,7 @@ export type CartItem = {
 const DetailPage = () => {
   const { storeId } = useParams();
   const { store, isLoading } = useGetStore(storeId);
+  const {createCheckoutSession,isLoading:isCheckoutLoading}=useCreateCheckoutSession();
   const [cartItems, setCartItems] = useState<CartItem[]>(()=>{
     const storedCarItems=sessionStorage.getItem(`cartItems-${storeId}`);
     return storedCarItems?JSON.parse(storedCarItems):[];
@@ -51,8 +53,22 @@ const DetailPage = () => {
       return updatedCartItems;
     });
   };
-  const onCheckout=(userFormData:UserFormData)=>{
+  const onCheckout=async(userFormData:UserFormData)=>{
+    if(!store){
+      return;
+    }
     console.log("UserFormData",userFormData);
+    const checkoutData={
+      cartItems:cartItems.map((cartItem)=>({
+        menuItemId: cartItem._id,
+        name: cartItem.name,
+        quantity: cartItem.quantity.toString(),
+      })),
+      storeId: store?._id,
+
+    }
+    const data=await createCheckoutSession(checkoutData);
+    window.location.href=data.url;
   }
 
 
@@ -94,7 +110,7 @@ const DetailPage = () => {
               cartItems={cartItems}
               removeFromCart={removeFromCart}
             />
-            <CardFooter><CheckoutButton disabled={cartItems.length===0} onCheckout={onCheckout}/></CardFooter>
+            <CardFooter><CheckoutButton disabled={cartItems.length===0} isLoading={isCheckoutLoading} onCheckout={onCheckout}/></CardFooter>
           </Card>
         </div>
       </div>

@@ -6,6 +6,7 @@ import myUserRoute from  "./routes/MyUserRoute"
 import myStoreRoute from "./routes/MyStoreRoute"
 import storeRoute from "./routes/StoreRoute"
 import { v2 as cloudinary } from 'cloudinary';
+import orderRoute from "./routes/Orderroute"
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
 
 cloudinary.config({
@@ -24,6 +25,7 @@ app.get("/health",async(req:Request,res:Response)=>{
 app.use("/api/my/user",myUserRoute)
 app.use("/api/my/store",myStoreRoute);
 app.use("/api/store",storeRoute)
+app.use("/api/order",orderRoute);
 app.listen(8000,()=>{
     console.log("Server running at http://localhost:8000");
 });

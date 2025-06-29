@@ -32,3 +32,18 @@ export type StoreSearchResponse={
         pages:number;
     }
 }
+
+export type Order = {
+  _id: string;
+  restaurant: Store;
+  user: User;
+  cartItems: {
+    menuItemId: string;
+    name: string;
+    quantity: string;
+  }[];
+  totalAmount: number;
+//   status: OrderStatus;
+  createdAt: string;
+  restaurantId: string;
+};
