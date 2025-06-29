@@ -6,42 +6,58 @@ import { Card, CardFooter } from "@/components/ui/card";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import {Item as MenuItemType} from "../types"
+import { Item as MenuItemType } from "../types";
+import CheckoutButton from "@/components/CheckoutButton";
 
-export type CartItem={
-    _id:string;
-    name:string;
-    price:number;
-    quantity:number;
-}
+export type CartItem = {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
+};
 
 const DetailPage = () => {
   const { storeId } = useParams();
   const { store, isLoading } = useGetStore(storeId);
-  const [cartItems,setCartItems]=useState<CartItem[]>([]);
-  const addToCart=(menuItem:MenuItemType)=>{
-    setCartItems((prevCartItems)=>{
-        const existingCartItem=prevCartItems.find((cartItem)=>cartItem._id===menuItem._id);
-        let updatedCartItems;
-        if(existingCartItem){
-            updatedCartItems=prevCartItems.map((cartItem)=>cartItem._id===menuItem._id?{...cartItem,quantity:cartItem.quantity+1}:cartItem)
-        }else{
-            updatedCartItems=[...prevCartItems,{
-                _id:menuItem._id,
-                name:menuItem.name,
-                price: menuItem.price,
-                quantity:1,
-            }];
-        } 
-        return updatedCartItems;
-    })
-  }
-  const removeFromCart=(cartItem:CartItem)=>{
-    setCartItems((prevCartItems)=>{
-        const updatedCartItems=prevCartItems.filter((item)=>cartItem._id!==item._id);
-        return updatedCartItems;
-    })
-  }
+  const [cartItems, setCartItems] = useState<CartItem[]>(()=>{
+    const storedCarItems=sessionStorage.getItem(`cartItems-${storeId}`);
+    return storedCarItems?JSON.parse(storedCarItems):[];
+  });
+  const addToCart = (menuItem: MenuItemType) => {
+    setCartItems((prevCartItems) => {
+      const existingCartItem = prevCartItems.find(
+        (cartItem) => cartItem._id === menuItem._id
+      );
+      let updatedCartItems;
+      if (existingCartItem) {
+        updatedCartItems = prevCartItems.map((cartItem) =>
+          cartItem._id === menuItem._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        updatedCartItems = [
+          ...prevCartItems,
+          {
+            _id: menuItem._id,
+            name: menuItem.name,
+            price: menuItem.price,
+            quantity: 1,
+          },
+        ];
+      }
+      sessionStorage.setItem(`cartItems-${storeId}`,JSON.stringify(updatedCartItems))
+      return updatedCartItems;
+    });
+  };
+  const removeFromCart = (cartItem: CartItem) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.filter(
+        (item) => cartItem._id !== item._id
+      );
+      return updatedCartItems;
+    });
+  };
   if (isLoading || !store) {
     return "...Loading";
   }
@@ -59,14 +75,20 @@ const DetailPage = () => {
           <span className="text-2xl font-bold tracking-tight">Menu</span>
 
           {store.items.map((menuItem) => (
-            <MenuItem addToCart={()=>addToCart(menuItem)} menuItem={menuItem}/>
-            ))}
+            <MenuItem
+              addToCart={() => addToCart(menuItem)}
+              menuItem={menuItem}
+            />
+          ))}
         </div>
 
         <div>
           <Card>
-            <OrderSummary cartItems={cartItems} removeFromCart={removeFromCart}/>
-            <CardFooter>footer</CardFooter>
+            <OrderSummary
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
+            <CardFooter><CheckoutButton/></CardFooter>
           </Card>
         </div>
       </div>
