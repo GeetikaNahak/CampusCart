@@ -1,6 +1,21 @@
 import { Request, Response } from "express";
 import Store from "../models/store";
 
+const getStore=async(req:Request,res:Response):Promise<any>=>{
+    try {
+        const storeId=req.params.storeId;
+        const store=await Store.findById(storeId);
+        if(!store){
+            return res.status(404).json({message:"store not found"});
+        }
+        res.json(store)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"something went wrong"});
+    }
+}
+
+
 const searchStore=async (req:Request,res:Response):Promise<any>=>{
     try {
         const city=req.params.city;
@@ -49,4 +64,5 @@ const searchStore=async (req:Request,res:Response):Promise<any>=>{
         res.status(500).json({message:"Something went wrong searching"});
     }
 }
-export default { searchStore}
+
+export default { searchStore,getStore }

@@ -8,6 +8,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.tsx";
 // import DetailsSection from './forms/manage-store-form/DetailsSection.tsx'
 import ManageStorePage from "./pages/ManageStorePage.tsx";
 import SearchPage from "./pages/SearchPage.tsx";
+import DetailPage from "./pages/DetailPage.tsx";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,14 @@ const AppRoutes = () => {
         element={
           <Layouts showHero={true}>
             <HomePage />
+          </Layouts>
+        }
+      />
+      <Route
+        path="/detail/:storeId"
+        element={
+          <Layouts showHero={false}>
+            <DetailPage />
           </Layouts>
         }
       />
