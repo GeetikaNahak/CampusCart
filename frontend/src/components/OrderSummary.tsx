@@ -3,14 +3,16 @@ import { CartItem } from "@/pages/DetailPage";
 import { CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Separator } from "@radix-ui/react-separator";
+import { Trash } from "lucide-react";
 
 type Props={
     // store:Store;
     cartItems:CartItem[];
+    removeFromCart: (cartItem:CartItem)=>void;
 }
 
 
-const OrderSummary = ({cartItems}:Props) => {
+const OrderSummary = ({cartItems,removeFromCart}:Props) => {
     const getTotalCost=()=>{
         const totalRupees=cartItems.reduce((total, cartItem)=>total+cartItem.price*cartItem.quantity,0);
         return (totalRupees/100).toFixed(2);
@@ -33,12 +35,12 @@ const OrderSummary = ({cartItems}:Props) => {
               {item.name}
             </span>
             <span className="flex items-center gap-1">
-              {/* <Trash
+              <Trash
                 className="cursor-pointer"
                 color="red"
                 size={20}
-                // onClick={() => removeFromCart(item)}
-              /> */}
+                onClick={() => removeFromCart(item)}
+              />
               ₹{((item.price * item.quantity) / 100).toFixed(2)}
             </span>
           </div>
