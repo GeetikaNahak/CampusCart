@@ -5,6 +5,7 @@ import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   searchQuery: z.string({
@@ -12,18 +13,28 @@ const formSchema = z.object({
   }),
 });
 
-export type SearchFrom = z.infer<typeof formSchema>;
+export type SearchForm = z.infer<typeof formSchema>;
 
 type Props = {
-  onSubmit: (formData: SearchFrom) => void;
+  searchQuery: string;
+  onSubmit: (formData: SearchForm) => void;
   placeHolder: string;
   onReset?: () => void;
 };
 
-const SearchBar = ({ onSubmit, onReset, placeHolder }: Props) => {
-  const form = useForm<SearchFrom>({
+const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }: Props) => {
+  const form = useForm<SearchForm>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      searchQuery,
+    },
   });
+
+  useEffect(() => {
+    form.reset({
+      searchQuery,
+    });
+  }, [form, searchQuery]);
 
   const handleReset = () => {
     form.reset({ searchQuery: "" });
@@ -34,8 +45,10 @@ const SearchBar = ({ onSubmit, onReset, placeHolder }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center gap-4 justify-between border-2 rounded-lg px-4 py-3 mx-5 shadow-sm transition-colors duration-200 ${
-          form.formState.errors.searchQuery ? "border-red-500" : "border-gray-300"
+        className={`flex items-center gap-4 justify-between border-2 rounded-lg px-4 py-3 shadow-sm transition-colors duration-200 ${
+          form.formState.errors.searchQuery
+            ? "border-red-500"
+            : "border-gray-300"
         }`}
       >
         <Search
@@ -60,16 +73,14 @@ const SearchBar = ({ onSubmit, onReset, placeHolder }: Props) => {
           )}
         />
 
-        {form.formState.isDirty && (
-          <Button
-            type="button"
-            variant="outline"
-            onClick={handleReset}
-            className="rounded-full text-sm border-gray-300 hover:border-gray-500"
-          >
-            Clear
-          </Button>
-        )}
+        <Button
+          type="button"
+          variant="outline"
+          onClick={handleReset}
+          className="rounded-full text-sm border-gray-300 hover:border-gray-500"
+        >
+          Reset
+        </Button>
 
         <Button
           type="submit"
