@@ -21,6 +21,7 @@ export default function HomePage() {
         <SearchBar  placeHolder="Search by Store Name " onSubmit={handleSearchSubmit}/>
       </div>
 
+
       <div className="grid md:grid-cols-2 gap-5">
         <img src={landingImage} alt="Landing" className="w-full rounded-lg" />
         <div className="flex flex-col items-center justify-center gap-4 text-center">
