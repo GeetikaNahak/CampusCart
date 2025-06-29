@@ -1,6 +1,7 @@
 import { useSearchStore } from "@/api/StoreApi";
 import SearchResultInfo from "@/components/SearchResultInfo";
-import { useParams } from "react-router-dom"
+import SearchResults from "@/components/SearchResults";
+import { useParams } from "react-router-dom";
 
 const SearchPage = () => {
   const { storeName } = useParams();
@@ -16,15 +17,18 @@ const SearchPage = () => {
 
   return (
     <div className="grid gird-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div id="cuisines-list">
-        insert cuisines here:
-      </div>
+      <div id="cuisines-list">insert cuisines here:</div>
       <div id="main-content" className="flex flex-col gap-5">
-        <SearchResultInfo total={results?.pagination.total} storeName={storeName} />
+        <SearchResultInfo
+          total={results?.pagination.total}
+          storeName={storeName}
+        />
+        {results.data.map((store) => (
+          <SearchResults key={store._id} store={store} />
+        ))}
       </div>
     </div>
   );
-}
+};
 
-
-export default SearchPage
+export default SearchPage;
