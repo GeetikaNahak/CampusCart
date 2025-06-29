@@ -1,11 +1,11 @@
 // import React from "react";
 import {  useNavigate } from "react-router-dom";
 import landingImage from "../assets/landingImage.png";
-import SearchBar, { SearchFrom } from "@/components/SearchBar";
+import SearchBar, { SearchForm } from "@/components/SearchBar";
 
 export default function HomePage() {
   const navigate=useNavigate();
-  const handleSearchSubmit=(searchFromValues:SearchFrom)=>{
+  const handleSearchSubmit=(searchFromValues:SearchForm)=>{
     navigate({
       pathname:`/search/${searchFromValues.searchQuery}`,
     })
