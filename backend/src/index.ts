@@ -6,7 +6,7 @@ import myUserRoute from  "./routes/MyUserRoute"
 import myStoreRoute from "./routes/MyStoreRoute"
 import storeRoute from "./routes/StoreRoute"
 import { v2 as cloudinary } from 'cloudinary';
-import orderRoute from "./routes/Orderroute"
+import orderRoute from "./routes/OrderRoute"
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(()=>console.log("Connected to Database Successfully !"));
 
 cloudinary.config({
