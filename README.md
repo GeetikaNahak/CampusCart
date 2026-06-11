@@ -1,4 +1,4 @@
-# Campus Cart - Your Food Buddy 🛒
+# Campus Cart  🛒
 
 **Your Campus, Your Canteen, Your Way!**
 
